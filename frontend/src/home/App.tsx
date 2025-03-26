@@ -1,14 +1,16 @@
 // import { useState } from 'react'
 import './App.css'
-import { Link } from 'react-router-dom';
-import AppRouter from '../AppRouter';
+// import { Link } from 'react-router-dom';
+import NavBar from '../components/NavBar';
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
-    <AppRouter />
-  )
+    <>
+      <NavBar />
+    </>
+  );
 }
 
 export default App;
