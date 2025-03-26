@@ -5,8 +5,9 @@ type User = {
 	age: number,
 	phoneNumber: number,
 	email: string,
-	lastVisit: string, // this is a longer string of visit information
-	userName: string,
+	lastVisitDay: string, // date that the person last visited HerHealthHub
+	lastVisitTime: string, // time that the person last visited HerHealthHub
+    userName: string,
 	password: string,
 	allergies: string[],
 	medicines: Medicine[],
