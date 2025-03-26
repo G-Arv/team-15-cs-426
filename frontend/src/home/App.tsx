@@ -8,6 +8,7 @@ function App() {
 
   return (
     <>
+      <header>Home Page</header>
       <NavBar />
     </>
   );
