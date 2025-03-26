@@ -26,6 +26,7 @@
 	--timeblock: oklch(90.9% 0.0648 151.8); /*can use*/
 	--text-link: oklch(70.87% 0.1516 271.66); /*can use*/
 	--success: oklch(75.33% 0.2083 148.71); /*can use*/
+	--error: oklch(65.18% 0.2339 34.08); /*can use*/
 	--card: oklch(1 0 0);
 	--card-foreground: oklch(0.145 0 0);
 	--popover: oklch(1 0 0);
