@@ -10,7 +10,7 @@ export function PrimaryButton({
 	return (
 		<Button
 			variant="default"
-			className="bg-primary text-light-txt"
+			className="bg-primary text-text-light"
 			onClick={handleClick}>
 			{btnText}
 		</Button>
