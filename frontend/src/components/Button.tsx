@@ -8,10 +8,7 @@ export function PrimaryButton({
 	handleClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 }) {
 	return (
-		<Button
-			variant="default"
-			className="bg-primary text-text-light"
-			onClick={handleClick}>
+		<Button variant="default" onClick={handleClick}>
 			{btnText}
 		</Button>
 	);
