@@ -1,14 +1,17 @@
-import { useState } from "react";
-import reactLogo from "../assets/react.svg";
-import viteLogo from "../../public/vite.svg";
+import "./App.css";
+import NavBar from "../components/NavBar";
 import "./App.css";
 import { LongButton, PrimaryButton } from "@/components/Button";
 
 function App() {
+	// const [count, setCount] = useState(0)
+
 	return (
-		<div>
+		<>
+			<header>Home Page</header>
+			<NavBar />
 			<LongButton btnText="some button" handleClick={undefined}></LongButton>
-		</div>
+		</>
 	);
 }
 
