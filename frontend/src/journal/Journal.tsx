@@ -1,10 +1,18 @@
-import NavBar from "../components/NavBar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/NavSidebar/Sidebar";
 
-export function Journal () {
+export function Journal ({ children }: { children: React.ReactNode }) {
     return (
     <>
+        <SidebarProvider>
+            <AppSidebar />
+            <main>
+            <SidebarTrigger />
+            {children}
+            </main>
+        </SidebarProvider>
+
         <header>Journal Page</header>
-        <NavBar />
     </>
     );
 }
