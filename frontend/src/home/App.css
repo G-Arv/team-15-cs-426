@@ -1,7 +1,7 @@
 #root {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  /* margin: 0 auto; 
+  padding: 2rem;  */
   text-align: center;
 }
 
@@ -39,4 +39,14 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Additional Page Styling for App.css */
+.appContainer {
+  display: inline-flex;
+}
+
+.appHeaders {
+  margin-top: 3em;
+  margin-left: 2em;
 }

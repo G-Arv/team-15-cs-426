@@ -1,11 +1,24 @@
-import NavBar from "../components/NavBar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { NavSidebar } from "@/components/NavBar/NavSideBar";
+import "./Journal.css"
 
-export function Journal () {
+export function Journal ({ children }: { children: React.ReactNode }) {
     return (
-    <>
-        <header>Journal Page</header>
-        <NavBar />
-    </>
+    <div className="journalContainer">  
+        <div>
+            <SidebarProvider>
+            <NavSidebar />
+            <main>
+                <SidebarTrigger />
+                {children}
+            </main>
+            </SidebarProvider>
+        </div>
+
+        <div className="journalHeaders">
+            <header>Journal Page</header>
+        </div>
+    </div>
     );
 }
 
