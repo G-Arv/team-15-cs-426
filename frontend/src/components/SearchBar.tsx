@@ -1,28 +1,14 @@
-import * as React from "react";
-import Textfield from "./ui/textfield.tsx";
-import { PrimaryButton } from "./Button.tsx";
-import MagnifyingGlassIcon from "../assets/Search Icon.svg";
+import { Input } from "./ui/input.tsx";
+import { Button } from "./ui/button.tsx";
+// import MagnifyingGlassIcon from "../assets/Search Icon.svg";
 
-interface SearchBarProps {
-  placeholder?: string;
-  value: string;
-  onChange: (value: string) => void;
-}
-
-const SearchBar: React.FC<SearchBarProps> = ({ placeholder = "Search...", value, onChange }) => {
-
+function SearchBar() {
   return (
-    <div className="flex items-center">
-      <MagnifyingGlassIcon />
-      <Textfield
-        className="flex-1 px-4 py-2 outline-none bg-transparent"
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
-      <PrimaryButton btnText="search" handleClick={undefined}></PrimaryButton>
+    <div className="flex w-full max-w-sm items-center space-x-2">
+      <Input type="text" placeholder="Search.." />
+      <Button type="submit">Search</Button>
     </div>
-  );
-};
+  )
+}
 
 export default SearchBar;
