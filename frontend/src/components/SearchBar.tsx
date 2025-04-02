@@ -1,7 +1,7 @@
 import * as React from "react";
 import Textfield from "./ui/textfield.tsx";
 import { PrimaryButton } from "./Button.tsx";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import MagnifyingGlassIcon from "../assets/Search Icon.svg";
 
 interface SearchBarProps {
   placeholder?: string;
@@ -13,7 +13,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ placeholder = "Search...", value,
 
   return (
     <div className="flex items-center">
-      <MagnifyingGlassIcon className="ml-3 text-gray-500" />
+      <MagnifyingGlassIcon />
       <Textfield
         className="flex-1 px-4 py-2 outline-none bg-transparent"
         placeholder={placeholder}
