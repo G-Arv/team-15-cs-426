@@ -1,77 +1,207 @@
-import { useState, useRef, useEffect } from "react";
+import { useMemo } from "react";
 import { ScheduleCard } from "./ScheduleCard";
+import { Medicine } from "@/mockData/dataTypes";
+import mockData from "./../../mockData/data.json"
 
-// Creates a card for each medicine the user has
-export function ScheduleDaily() {
-    // const scheduleCards = displayData()
-    // console.log("did it get here to components?")
-    const [data, setData] = useState<any>([])
-    const ref = useRef<any[]>([])
-    // const [cards, setCards] = useState<any>([])
-    let count = 0;
+// Stores the four timeslots that medicine cards can be sorted through
+let morning: Medicine[] = [] // 6:00 AM - 12:00 PM
+let afternoon: Medicine[] = [] // 12:00 PM - 5:00 PM
+let evening: Medicine[] = [] // 5:00 PM - 10:00 PM
+let night: Medicine[] = [] // 10:00 PM - 6:00 PM
 
-    const fetchData = async (ignore: boolean) => {
-        await fetch('src/mockData/data.json')
-        .then((res) => {
-            if(!res.ok) {
-                throw new Error('Error with retrieving data')
+// Determines whether a medicine should be displayed on a particular date
+// Parameters: medicineInfo: the specific medicine
+// Return: boolean
+const medicineDate = (medicineInfo: any) => {
+    const start = medicineInfo.dateRange[0]
+    const end = medicineInfo.dateRange[1]
+    const weekDayValues = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    const today = new Date()
+    const dayOfWeek = weekDayValues[today.getDay()]
+    
+    const findWeekDay = () => {
+        for(let i = 0; i < medicineInfo.weekDays.length; ++i) {
+            if(medicineInfo.weekDays[i] == dayOfWeek) {
+                return true;
             }
-            else {
-                return res.json()
-            }
-        })
-        .then((resData) => {
-            if(resData && resData.length > 0) {
-                const meds = resData[0].medicines
-              //  console.log(meds.length + "Run # " + count + " currently in ref " + ref.current[0].name + " and " + ref.current[1].name)
-                for(let i = 0; i < meds.length; ++i) {
-                    if(count == 1 && !ignore) {
-                        console.log(ignore + " and " + data)
-                        ref.current = data
-                        break;
-                    }
-                    else if (ignore) {
-                        ref.current = data
-                        break
-                    }
-                    else {
-                         console.log("Number of cards created: " + i)
-                         ref.current.push(<ScheduleCard key={meds[i].name + i.toString()} medicineInfo={meds[i]} />)
-                         console.log("After push, this is ref: " + ref.current)
-                    }
-                }
-                setData(ref.current)
-                console.log(data + " and current ref " + ref.current)
-                count++
-            }
-        }) 
-        .catch(e => console.error("Failed to retrieve data:  " + e))  
+        }
+        return false;
     }
 
-    useEffect(() => {
-        let ignore = false
+    return Date.parse(start) < Date.parse(today.toLocaleDateString()) &&  
+    Date.parse(today.toLocaleDateString()) < Date.parse(end) && findWeekDay()
+}
 
-        fetchData(ignore)
-        console.log("ran once")
-        return () => {
-            ref.current = []
-            console.log(ref.current)
-            ignore = true
+// Determines how each medicineInfo card is sorted into the timeslots above, 
+// and creates new medicineInfo cards if the medicine has multiple times 
+// it is taken per day.
+// Parameters: medicineInfo: the specific medicine
+const medicineTime = (medicineInfo: any) => {
+    console.log(medicineInfo)
+    let times = medicineInfo.timeRange
+    
+    for(let i = 0; i < times.length; ++i) {
+        let currTime = times[i].split(" ")
+        let timeSplit = currTime[0].split(":")
+        let newTime: Medicine = {
+            name: medicineInfo.name,
+            amount: medicineInfo.amount,
+            foodAndPills: medicineInfo.foodAndPills,
+            dateRange: medicineInfo.dateRange,
+            timeRange: [times[i]],
+            weekDays: medicineInfo.weekDays
         }
-    }, [])
 
-    // if(ref.current) {
-    //     console.log(ref)
-    //     for(let i = 0; i < ref.current.length; ++i) {
-    //         setCards([...cards, <ScheduleCard medicineInfo={ref.current[i]}/>]) 
-    //     }
-    // }
+        // Morning
+        if(currTime[1] == "AM" && (parseInt(timeSplit[0]) > 6 && parseInt(timeSplit[0]) < 12)) {
+            morning.push(newTime)
+        }
+        
+        // Afternoon
+        else if(currTime[1] == "PM" && (parseInt(timeSplit[0]) == 12 || parseInt(timeSplit[0]) < 5)) {
+            afternoon.push(newTime)
+        }
+        
+        // Evening
+        else if(currTime[1] == "PM" && (parseInt(timeSplit[0]) > 6 && parseInt(timeSplit[0]) < 10)) {
+            evening.push(newTime)
+        }
+        
+        // Night
+        else {
+            night.push(newTime)
+        }
+    }
+}
 
-    console.log("Got to render " + ref.current)
+// Sorts the times for each array to ensure they are displayed in the correct order.
+// This is used in the createCards function.
+// Parameters: arr, which is the current array of information to be displayed in
+// and isNight, which is a boolean determining whether or not the array is for the night
+// Return: any[]
+const sortTimes = (arr: any[], isNight: boolean) => {
+    let res = [];
+    
+    // Sorts the night array differently as there are two sets of times to be sorted
+    // between 10:00 PM to 1:00 AM and 1:00 AM to 6:00 AM
+    if(isNight) {
+        let pmArr = []
+        let amArr = []
+        
+        for(let i = 0; i < arr.length; ++i) {
+            if(parseInt(arr[i].timeRange[0]) >= 10) {
+                pmArr.push(arr[i])
+            }
+            else {
+                amArr.push(arr[i])
+            }
+        }
+        
+        let sortedPMArr = pmArr.sort((a, b) => parseInt(a.timeRange[0]) - parseInt(b.timeRange[0]))
+        let sortedAMArr = amArr.sort((a, b) => parseInt(a.timeRange[0]) - parseInt(b.timeRange[0]))
+        
+        res = sortedPMArr.concat(sortedAMArr)
+    }
+    else {
+        res = arr.sort((a, b) => parseInt(a.timeRange[0]) - parseInt(b.timeRange[0]))
+    }
+    
+    return res
+}
+
+// Creates an individual card component for each card in the given array
+// Parameters: info, which is the original array of times of day, cardArr,
+// which is a new array where the new cards will be stored, and isNight, 
+// which is a boolean determining whether the array is the night array
+// Return: any[]
+const createCards = (info: any[], cardArr: any[], isNight: boolean) => {
+    let sortedInfo = sortTimes(info, isNight);
+
+    for(let i = 0; i < sortedInfo.length; ++i) {
+        cardArr.push(<ScheduleCard key={sortedInfo[i].name + i.toString()} medicineInfo={sortedInfo[i]} />)
+    }
+
+    
+    return cardArr;
+}
+
+// Creates the cards to display after running MedicineTime
+const displayCards = () => {
+    if(morning.length == 0 && afternoon.length == 0 && evening.length == 0 && night.length == 0) {
+        return (
+            <p>No medicines to display. Click Add to add new medicines.</p>
+        )
+    }
+    else {
+        let morningCards: any[] = []
+        let afternoonCards: any[] = []
+        let eveningCards: any[] = []
+        let nightCards: any[] = []
+
+        // Runs createCards for each of the four times of day
+        morningCards = createCards(morning, morningCards, false)
+        afternoonCards = createCards(afternoon, afternoonCards, false)
+        eveningCards = createCards(evening, eveningCards, false)
+        nightCards = createCards(night, nightCards, true)
+
+        // Creates components based on times of day and whether there is a medicine at that time of day
+        return (
+            <>
+                <div>
+                    {morningCards.length == 0 ? null :
+                    <>
+                        <h2>Morning</h2>
+                        {morningCards}
+                    </>
+                    }
+                </div>
+                <div>
+                    {afternoonCards.length == 0 ? null :
+                    <>
+                        <h2>Afternoon</h2>
+                        {afternoonCards}
+                    </>
+                    }
+                </div>
+                <div>
+                    {eveningCards.length == 0 ? null :
+                    <>
+                        <h2>Evening</h2>
+                        {eveningCards}
+                    </>
+                    }
+                </div>
+                <div>
+                    {nightCards.length == 0 ? null :
+                    <>
+                        <h2>Night</h2>
+                        {nightCards}
+                    </>
+                    }
+                </div>
+            </>
+        )
+    }
+}
+
+// Creates a card for each medicine the user has
+// Return: React Component
+export function ScheduleDaily() {
+    
+    // Uses user 0 as the initial user
+    const currUser = mockData[0]    
+
+    for(let i = 0; i < currUser.medicines.length; ++i) {
+        if(medicineDate(currUser.medicines[i])) {
+            medicineTime(currUser.medicines[i])
+        }
+    }
+
+    const res = useMemo(() => displayCards(), [])
 
     return (
         <>
-            {ref.current}
+            {res}
         </>
     )
 }

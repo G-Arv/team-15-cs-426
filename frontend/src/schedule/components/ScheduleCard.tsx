@@ -19,7 +19,7 @@ export function ScheduleCard({medicineInfo}: any) {
 
 
     return (
-        <Card>
+        <Card className="mb-10 timeblock">
             <CardHeader>
                 <CardTitle>{medicineInfo.name}</CardTitle>
                 <CardDescription>{medicineInfo.timeRange[0]}</CardDescription>

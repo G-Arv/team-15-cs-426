@@ -1,20 +1,20 @@
 
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogHeader, DialogFooter } from "@/components/ui/dialog"
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form"
+import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { cn } from "@/lib/utils"
 import { Medicine } from "@/mockData/dataTypes"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover"
-import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group"
-import { format } from "date-fns"
 import { CalendarIcon } from "lucide-react"
-import { Form, useForm } from "react-hook-form"
-import { toast } from "sonner"
+import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { format } from "date-fns"
+import { toast } from "sonner"
 
 "use client"
 
@@ -80,34 +80,16 @@ export function MedicineDialog() {
     // Handles submission of information entered into Add Medicine and currently adds it to the data.json file for user 1. 
     // Parameter: value - an object containing information about a particular medicine verified through zod
     function onSubmit(values: z.infer<typeof medicineSchema>) {
-        // TODO: set values of schema into mock data for now, and then put them into the 
-        // page as elements in the card
         const newMedicine: Medicine = {
             name: values.name,
             amount: values.amount,
             foodAndPills: parseInt(values.foodMedicine),
             dateRange: [values.startDate, values.endDate],
-            timeRange: values.notification.split(","),
+            timeRange: values.notification.split(", "),
             weekDays: values.daysOfWeek
         }
 
-        // TODO: verify that this is working
-        console.log(newMedicine)
-        const fs = require("fs")
-
-        const userData = fs.readFileSync("src/mockData/data.json")
-        const parsedUserData = JSON.parse(userData)
-        parsedUserData[0].medicines.push(newMedicine)
-
-        const updatedUserData = JSON.stringify(parsedUserData)
-        fs.writeFile("src/mockData/data.json", updatedUserData, (err: any) => {
-            if(err) {
-                throw err
-            }
-            else {
-                console.log("New data added")
-            }
-        })
+        // Note: For the next milestone, this will be stored with the data
         console.log(newMedicine)
     }
 
