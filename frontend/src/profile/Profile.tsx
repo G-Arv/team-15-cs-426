@@ -1,7 +1,7 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { DocumentCards } from "@/components/DocumentCard.tsx";
 import { ProfileCard } from "../components/ProfileCard.tsx";
 import { Button } from "@/components/ui/button.tsx";
+import { ProfileForm } from "@/components/UploadDocumentForm.tsx";
 import "./Profile.css";
 import Layout from "@/components/NavBar/NavSidebarLayout";
 import SearchBar from "../components/SearchBar";
@@ -15,7 +15,7 @@ export function Profile () {
                 <header className="text-2xl font-bold mb-4">Profile Page</header>
                 <ProfileCard />
                 <SearchBar/>
-                <Button type="submit">Upload Document</Button>
+                <Button type="submit" onClick={ProfileForm}>Upload Document</Button>
                 <DocumentCards/>
         </div>
     </Layout> 
