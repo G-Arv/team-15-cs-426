@@ -18,7 +18,8 @@
 				"foodAndPills": 2,
 				"dateRange": ["2025-02-25", "2025-04-25"],
 				"timeRange": ["9:00 AM"],
-				"weekDays": ["Monday", "Wednesday", "Friday"]
+				"weekDays": ["Monday", "Wednesday", "Friday"],
+				"type": "tablet"
 			},
 			{
 				"name": "Aspirin",
@@ -26,7 +27,8 @@
 				"foodAndPills": 1,
 				"dateRange": ["2025-02-25", "2025-04-25"],
 				"timeRange": ["2:00 PM"],
-				"weekDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+				"weekDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+				"type": "tablet"
 			}
 		],
 		"vitals": [
@@ -72,7 +74,8 @@
 				"foodAndPills": 2,
 				"dateRange": ["2025-03-25", "2025-04-07"],
 				"timeRange": ["11:00 AM"],
-				"weekDays": ["Saturday", "Sunday"]
+				"weekDays": ["Saturday", "Sunday"],
+				"type": "capsule"
 			}
 		],
 		"vitals": [
