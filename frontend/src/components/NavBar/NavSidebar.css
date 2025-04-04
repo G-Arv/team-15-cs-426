@@ -1,0 +1,15 @@
+/* Styling for NavSidebar */
+
+/* Note: I've added an additional color that's a bit more visible than the current
+         light gray color for text. We could use this if preferred.
+*/
+a {
+    color: #a3aed0; 
+    /* color: #7680a0 */
+}
+
+a:hover {
+    color: white;
+    background-color: #4318ff;
+}
+

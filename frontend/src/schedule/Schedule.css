@@ -7,15 +7,11 @@
     margin-left: 2em;
 }
 
-/* TODO: make this relative to the calendar once I get it to work */
 .scheduleMedicine {
     margin-top: 6em;
     margin-left: 10em;  
 }
 
 .calendarSidebar {
-    /* display: flex;
-    justify-content: right;
-    position: relative; */
     float: right;
 }
