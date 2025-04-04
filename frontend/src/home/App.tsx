@@ -13,6 +13,7 @@ import {
 import { useEffect, useState } from "react";
 import mockData from "../mockData/data.json";
 import { DateType, MedicineInfoType, ReminderCardType } from "@/interface";
+import Layout from "@/components/NavBar/NavSidebarLayout";
 
 function ReminderCard({
 	amount,
@@ -105,7 +106,7 @@ function App() {
 		setToday(getToday());
 	}, []);
 	return (
-		<div>
+		<Layout>
 			<div>
 				<span>Hi username! How are you doing today? </span>
 				<h1 className="text-text-title">
@@ -118,7 +119,7 @@ function App() {
 			<div>
 				<h1 className="text-text-title">Medical Tips</h1>
 			</div>
-		</div>
+		</Layout>
 	);
 }
 
