@@ -1,95 +1,98 @@
 [
-    {
-        "firstName": "Nithya",
-        "lastName": "Jayakumar",
-        "gender": "Female",       
-        "age": 32,
-        "phoneNumber": 8745635422,
-        "email": "nithyajayakumar@gmail.com",
-        "lastVisitDay": "11/03/23",
-        "lastVisitTime": "9:30 AM",
-        "userName": "nithyaJaya",
-        "password": "j@y@N1thy@",
-        "allergies": ["Peanut Allergy", "Lactose Intolerant"],
-        "medicines": [
-            {
-                "name": "Tylenol",
-                "amount": 2,
-                "foodAndPills": 2,
-                "dateRange": ["2/26/25", "3/26/25"],
-                "timeRange": ["9:00 AM"],
-                "weekDays": ["Monday", "Wednesday", "Friday"]
-            },
-            {
-                "name": "Aspirin",
-                "amount": 1,
-                "foodAndPills": 1,
-                "dateRange": ["2/26/25", "4/26/25"],
-                "timeRange": ["2:00 PM"],
-                "weekDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-            }
-        ],
-	    "vitals": [
-            {
-                "bloodGlucoseBefore": 120,
-                "bloodGlucoseAfter": 120, 
-                "temperature": 98.1,
-                "height": 160,
-                "weight": 55,
-                "bloodPressure": "120/80"
-            },
-            {
-                "bloodGlucoseBefore": 120,
-                "bloodGlucoseAfter": 125, 
-                "temperature": 98.0,
-                "height": 160,
-                "weight": 55,
-                "bloodPressure": "119/79"
-            }
-        ],
-	    "documents": [
-            {
-                "name": "eye prescription",
-                "file": "something.pdf"
-            }
-        ]
-    },
-    {
-        "firstName": "Lia",
-        "lastName": "Chen",
-        "gender": "Female",       
-        "age": 25,
-        "phoneNumber": 2049039288,
-        "email": "liachen28@gmail.com",
-        "lastVisit": "11/08/23 Wednesday 9:00 PM",
-        "userName": "LiaChen",
-        "password": "L1A285",
-        "allergies": [],
-        "medicines": [
-            {
-                "name": "Aleve",
-                "amount": 2,
-                "foodAndPills": 2,
-                "dateRange": ["2/3/25", "7/3/25"],
-                "timeRange": ["11:00 AM"],
-                "weekDays": ["Saturday", "Sunday"]
-            }
-        ],
-	    "vitals": [
-            {
-                "bloodGlucoseBefore": 100,
-                "bloodGlucoseAfter": 100, 
-                "temperature": 97.9,
-                "height": 155,
-                "weight": 50,
-                "bloodPressure": "115/75"
-            }
-        ],
-	    "documents": [
-            {
-                "name": "yearly records",
-                "file": "something2.pdf"
-            }
-        ]
-    }
+	{
+		"firstName": "Nithya",
+		"lastName": "Jayakumar",
+		"gender": "Female",
+		"age": 32,
+		"phoneNumber": 8745635422,
+		"email": "nithyajayakumar@gmail.com",
+		"lastVisitDay": "11/03/23",
+		"lastVisitTime": "9:30 AM",
+		"userName": "nithyaJaya",
+		"password": "j@y@N1thy@",
+		"allergies": ["Peanut Allergy", "Lactose Intolerant"],
+		"medicines": [
+			{
+				"name": "Tylenol",
+				"amount": 2,
+				"foodAndPills": 2,
+				"dateRange": ["2025-02-25", "2025-04-25"],
+				"timeRange": ["9:00 AM"],
+				"weekDays": ["Monday", "Wednesday", "Friday"],
+				"type": "tablet"
+			},
+			{
+				"name": "Aspirin",
+				"amount": 1,
+				"foodAndPills": 1,
+				"dateRange": ["2025-02-25", "2025-04-25"],
+				"timeRange": ["2:00 PM"],
+				"weekDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+				"type": "tablet"
+			}
+		],
+		"vitals": [
+			{
+				"bloodGlucoseBefore": 120,
+				"bloodGlucoseAfter": 120,
+				"temperature": 98.1,
+				"height": 160,
+				"weight": 55,
+				"bloodPressure": "120/80"
+			},
+			{
+				"bloodGlucoseBefore": 120,
+				"bloodGlucoseAfter": 125,
+				"temperature": 98.0,
+				"height": 160,
+				"weight": 55,
+				"bloodPressure": "119/79"
+			}
+		],
+		"documents": [
+			{
+				"name": "eye prescription",
+				"file": "something.pdf"
+			}
+		]
+	},
+	{
+		"firstName": "Lia",
+		"lastName": "Chen",
+		"gender": "Female",
+		"age": 25,
+		"phoneNumber": 2049039288,
+		"email": "liachen28@gmail.com",
+		"lastVisit": "11/08/23 Wednesday 9:00 PM",
+		"userName": "LiaChen",
+		"password": "L1A285",
+		"allergies": [],
+		"medicines": [
+			{
+				"name": "Aleve",
+				"amount": 2,
+				"foodAndPills": 2,
+				"dateRange": ["2025-03-25", "2025-04-07"],
+				"timeRange": ["11:00 AM"],
+				"weekDays": ["Saturday", "Sunday"],
+				"type": "capsule"
+			}
+		],
+		"vitals": [
+			{
+				"bloodGlucoseBefore": 100,
+				"bloodGlucoseAfter": 100,
+				"temperature": 97.9,
+				"height": 155,
+				"weight": 50,
+				"bloodPressure": "115/75"
+			}
+		],
+		"documents": [
+			{
+				"name": "yearly records",
+				"file": "something2.pdf"
+			}
+		]
+	}
 ]
