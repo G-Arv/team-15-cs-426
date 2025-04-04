@@ -43,22 +43,29 @@ function ReminderCardsList({
 	drugsData: MedicineInfoType[];
 	today: DateType;
 }) {
-	return drugsData.map((medicine: MedicineInfoType) => {
-		if (
-			new Date(medicine.dateRange[0]).valueOf() < today.wholeDate.valueOf() &&
-			new Date(medicine.dateRange[1]).valueOf() > today.wholeDate.valueOf() &&
-			medicine.weekDays.includes(today.day)
-		) {
-			return (
-				<ReminderCard
-					name={medicine.name}
-					amount={medicine.amount}
-					time={medicine.timeRange[0]}
-				/>
-			);
-		}
-		return <></>;
-	});
+	return (
+		<>
+			{drugsData.map((medicine: MedicineInfoType, i: number) => {
+				if (
+					new Date(medicine.dateRange[0]).valueOf() <
+						today.wholeDate.valueOf() &&
+					new Date(medicine.dateRange[1]).valueOf() >
+						today.wholeDate.valueOf() &&
+					medicine.weekDays.includes(today.day)
+				) {
+					return (
+						<ReminderCard
+							key={i}
+							name={medicine.name}
+							amount={medicine.amount}
+							time={medicine.timeRange[0]}
+						/>
+					);
+				}
+				return <></>;
+			})}
+		</>
+	);
 }
 
 function App() {
