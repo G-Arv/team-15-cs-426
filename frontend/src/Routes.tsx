@@ -1,3 +1,4 @@
+// import { RouteObject } from 'react-router-dom';
 import {
   createBrowserRouter
 } from "react-router";
@@ -10,23 +11,23 @@ import Settings from './settings/Settings';
 const routes = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <App children={undefined}/>,
   },
   {
     path: '/journal',
-    element: <Journal />,
+    element: <Journal children={undefined}/>,
   },
   {
     path: '/schedule',
-    element: <Schedule />,
+    element: <Schedule children={undefined}/>,
   },
   {
     path: '/profile',
-    element: <Profile />,
+    element: <Profile children={undefined}/>,
   },
   {
     path: '/settings',
-    element: <Settings />,
+    element: <Settings children={undefined}/>,
   }
 ]);
 
