@@ -37,7 +37,6 @@ const medicineDate = (medicineInfo: any) => {
 // it is taken per day.
 // Parameters: medicineInfo: the specific medicine
 const medicineTime = (medicineInfo: any) => {
-    console.log(medicineInfo)
     let times = medicineInfo.timeRange
     
     for(let i = 0; i < times.length; ++i) {

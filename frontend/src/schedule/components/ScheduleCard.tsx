@@ -20,12 +20,12 @@ export function ScheduleCard({medicineInfo}: any) {
 
 
     return (
-        <Card className="mb-10 bg-[#c2eecc] font-[Avenir]">
-            <CardHeader>
-                <CardTitle >{medicineInfo.name}</CardTitle>
+        <Card className="mb-10 bg-[#c2eecc] font-[Avenir] items-center">
+            <CardHeader className="ps-0 w-30">
+                <CardTitle className="ml-5">{medicineInfo.name}</CardTitle>
                 <div className="inline-flex">
-                <Clock strokeWidth={2} size={18} color="#717171" className="ml-14 mr-2"/>
-                <CardDescription className="">{medicineInfo.timeRange[0]}</CardDescription>
+                <Clock strokeWidth={2} size={18} color="#717171" className="ml-4 mr-2"/>
+                <CardDescription>{medicineInfo.timeRange[0]}</CardDescription>
                 </div>
             </CardHeader>
             <CardContent>
@@ -33,8 +33,8 @@ export function ScheduleCard({medicineInfo}: any) {
                 <p>When to take: {medicineMealsDisplay}</p>
             </CardContent>
             <CardFooter>
-                <p className="ml-8 mr-2">Complete? </p>
-                <Checkbox />
+                <p className="ml-8 mr-2">Completed? </p>
+                <Checkbox className="bg-[#FFFFFF]"/>
             </CardFooter>
         </Card>
     )

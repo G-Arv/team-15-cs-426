@@ -3,7 +3,6 @@ import { NavSidebar } from "./NavSidebar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		// <div className="inline-flex">
 		<SidebarProvider>
 			<NavSidebar />
 			<main className="flex flex-col m-3">
@@ -11,6 +10,5 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 				<div className="ml-5 mt-2">{children}</div>
 			</main>
 		</SidebarProvider>
-		// </div>
 	);
 }

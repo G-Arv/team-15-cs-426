@@ -7,14 +7,12 @@ export function CalendarSidebar() {
 
     return (
         <Sidebar side="right" collapsible="none">
-            {/* <SidebarHeader> */}
             <Calendar
                 mode="single"
                 selected={date}
                 onSelect={setDate}
                 className="rounded-md border"
             />
-            {/* </SidebarHeader> */}
         </Sidebar>
     )
 }

@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -116,7 +115,7 @@ export function MedicineDialog() {
                         <FormItem>
                         <FormLabel>Name</FormLabel>
                         <FormControl>
-                            <Input placeholder="Enter name" {...field} />
+                            <Input placeholder="Enter name" {...field} className="bg-[#F8F8F6]"/>
                         </FormControl>
                         <FormMessage />
                         </FormItem>
@@ -130,7 +129,7 @@ export function MedicineDialog() {
                         <FormItem>
                         <FormLabel>Amount</FormLabel>
                         <FormControl>
-                            <Input placeholder="0" {...field} />
+                            <Input placeholder="0" {...field} className="bg-[#F8F8F6]"/>
                         </FormControl>
                         <FormMessage />
                         </FormItem>
@@ -145,7 +144,7 @@ export function MedicineDialog() {
                         <FormItem>
                         <FormLabel>Type</FormLabel>
                         <FormControl>
-                            <Input placeholder="Type" {...field} />
+                            <Input placeholder="Type" {...field} className="bg-[#F8F8F6]"/>
                         </FormControl>
                         <FormMessage />
                         </FormItem>
@@ -167,7 +166,7 @@ export function MedicineDialog() {
                                 >
                                 <FormItem className="flex items-center space-x-3 space-y-0">
                                     <FormControl>
-                                    <RadioGroupItem value="0" />
+                                    <RadioGroupItem value="0" className="bg-[#ebebe9]"/>
                                     </FormControl>
                                     <FormLabel className="font-normal">
                                     Before Meals
@@ -175,7 +174,7 @@ export function MedicineDialog() {
                                 </FormItem>
                                 <FormItem className="flex items-center space-x-3 space-y-0">
                                     <FormControl>
-                                    <RadioGroupItem value="1" />
+                                    <RadioGroupItem value="1"className="bg-[#ebebe9]"/>
                                     </FormControl>
                                     <FormLabel className="font-normal">
                                     During Meals
@@ -183,7 +182,7 @@ export function MedicineDialog() {
                                 </FormItem>
                                 <FormItem className="flex items-center space-x-3 space-y-0">
                                     <FormControl>
-                                    <RadioGroupItem value="2" />
+                                    <RadioGroupItem value="2" className="bg-[#ebebe9]"/>
                                     </FormControl>
                                     <FormLabel className="font-normal">
                                     After Meals
@@ -209,7 +208,7 @@ export function MedicineDialog() {
                                     <Button
                                     variant={"outline"}
                                     className={cn(
-                                        "w-[240px] pl-3 text-left font-normal",
+                                        "w-[240px] pl-3 text-left font-normal bg-[#F8F8F6]",
                                         !field.value && "text-muted-foreground"
                                     )}
                                     >
@@ -252,7 +251,7 @@ export function MedicineDialog() {
                                         <Button
                                         variant={"outline"}
                                         className={cn(
-                                            "w-[240px] pl-3 text-left font-normal",
+                                            "w-[240px] pl-3 text-left font-normal bg-[#F8F8F6]",
                                             !field.value && "text-muted-foreground"
                                         )}
                                         >
@@ -292,7 +291,7 @@ export function MedicineDialog() {
                         <FormItem>
                             <FormLabel>Notification Time(s)</FormLabel>
                             <FormControl>
-                                <Input placeholder="" {...field} />
+                                <Input placeholder="" {...field} className="bg-[#F8F8F6]"/>
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -321,6 +320,7 @@ export function MedicineDialog() {
                                     >
                                         <FormControl>
                                         <Checkbox
+                                            className="bg-[#ebebe9]"
                                             checked={field.value?.includes(item.id)}
                                             onCheckedChange={(checked) => {
                                             return checked
