@@ -29,7 +29,8 @@ const medicineSchema = z.object({
     notification: z.string(),
     daysOfWeek: z.array(z.string()).refine((value) => value.some((item) => item), {
         message: "You have to select at least one item.",
-      }),
+    }),
+    type: z.string()
 })
 
 const daysOfWeekArr = [
@@ -74,6 +75,7 @@ export function MedicineDialog() {
             endDate: undefined,
             notification: "8:00 AM",
             daysOfWeek: [],
+            type: ""
         }
     })
 
@@ -86,7 +88,8 @@ export function MedicineDialog() {
             foodAndPills: parseInt(values.foodMedicine),
             dateRange: [values.startDate, values.endDate],
             timeRange: values.notification.split(", "),
-            weekDays: values.daysOfWeek
+            weekDays: values.daysOfWeek,
+            type: values.type
         }
 
         // Note: For the next milestone, this will be stored with the data
@@ -96,7 +99,7 @@ export function MedicineDialog() {
     return (
         <Dialog>
         <DialogTrigger asChild>
-            <Button variant="outline">Add Medicine</Button>
+            <Button>Add Medicine</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[600px] text-[#0A0909] font-[Avenir]">
             <DialogHeader>
@@ -128,6 +131,21 @@ export function MedicineDialog() {
                         <FormLabel>Amount</FormLabel>
                         <FormControl>
                             <Input placeholder="0" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )}
+                    />
+                    <br />
+
+                    <FormField
+                    control={medForm.control}
+                    name="type"
+                    render={({ field }) => (
+                        <FormItem>
+                        <FormLabel>Type</FormLabel>
+                        <FormControl>
+                            <Input placeholder="Type" {...field} />
                         </FormControl>
                         <FormMessage />
                         </FormItem>

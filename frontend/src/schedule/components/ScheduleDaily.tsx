@@ -49,7 +49,8 @@ const medicineTime = (medicineInfo: any) => {
             foodAndPills: medicineInfo.foodAndPills,
             dateRange: medicineInfo.dateRange,
             timeRange: [times[i]],
-            weekDays: medicineInfo.weekDays
+            weekDays: medicineInfo.weekDays,
+            type: medicineInfo.type
         }
 
         // Morning
