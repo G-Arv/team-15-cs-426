@@ -11,7 +11,7 @@ import Settings from './settings/Settings';
 const routes = createBrowserRouter([
   {
     path: '/',
-    element: <App children={undefined}/>,
+    element: <App/>,
   },
   {
     path: '/journal',
@@ -23,7 +23,7 @@ const routes = createBrowserRouter([
   },
   {
     path: '/profile',
-    element: <Profile children={undefined}/>,
+    element: <Profile/>,
   },
   {
     path: '/settings',
