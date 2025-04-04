@@ -150,7 +150,7 @@ const displayCards = () => {
                 <div>
                     {morningCards.length == 0 ? null :
                     <>
-                        <h2>Morning</h2>
+                        <h2 className="text-xl font-bold mb-4 text-[#2b3674] font-[Avenir]">Morning</h2>
                         {morningCards}
                     </>
                     }
@@ -158,7 +158,7 @@ const displayCards = () => {
                 <div>
                     {afternoonCards.length == 0 ? null :
                     <>
-                        <h2>Afternoon</h2>
+                        <h2 className="text-xl font-bold mb-4 text-[#2b3674] font-[Avenir]">Afternoon</h2>
                         {afternoonCards}
                     </>
                     }
@@ -166,7 +166,7 @@ const displayCards = () => {
                 <div>
                     {eveningCards.length == 0 ? null :
                     <>
-                        <h2>Evening</h2>
+                        <h2 className="text-xl font-bold mb-4 text-[#2b3674] font-[Avenir]">Evening</h2>
                         {eveningCards}
                     </>
                     }
@@ -174,7 +174,7 @@ const displayCards = () => {
                 <div>
                     {nightCards.length == 0 ? null :
                     <>
-                        <h2>Night</h2>
+                        <h2 className="text-xl font-bold mb-4 text-[#2b3674] font-[Avenir]">Night</h2>
                         {nightCards}
                     </>
                     }

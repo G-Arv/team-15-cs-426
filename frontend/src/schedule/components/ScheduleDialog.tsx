@@ -98,12 +98,14 @@ export function MedicineDialog() {
         <DialogTrigger asChild>
             <Button variant="outline">Add Medicine</Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[600px] text-[#0A0909] font-[Avenir]">
             <DialogHeader>
             <DialogTitle>Add Medicine Plan</DialogTitle>
             </DialogHeader>
             <Form {...medForm}>
                 <form onSubmit={medForm.handleSubmit(onSubmit)} className="space-y-8">
+                    <div className="inline-flex">
+                    <div className="mr-25">
                     <FormField
                     control={medForm.control}
                     name="name"
@@ -117,6 +119,7 @@ export function MedicineDialog() {
                         </FormItem>
                     )}
                     />
+                    <br />
                     <FormField
                     control={medForm.control}
                     name="amount"
@@ -130,6 +133,7 @@ export function MedicineDialog() {
                         </FormItem>
                     )}
                     />
+                    <br />
 
                     <FormField
                         control={medForm.control}
@@ -173,6 +177,7 @@ export function MedicineDialog() {
                             </FormItem>
                             )}
                     />
+                    <br />
 
                     <FormField
                         control={medForm.control}
@@ -215,6 +220,7 @@ export function MedicineDialog() {
                             </FormItem>
                         )}
                         />
+                        <br />
 
                         <FormField
                             control={medForm.control}
@@ -258,7 +264,9 @@ export function MedicineDialog() {
                             )}
                         />
 
-
+                        </div>
+                    
+                    <div>
                     <FormField
                     control={medForm.control}
                     name="notification"
@@ -272,6 +280,7 @@ export function MedicineDialog() {
                         </FormItem>
                     )}
                     />
+                    <br />
 
                     <FormField
                         control={medForm.control}
@@ -318,6 +327,8 @@ export function MedicineDialog() {
                             </FormItem>
                         )}
                     />
+                    </div>
+                    </div>
                     <Button type="submit" onClick={() => {
                         // Dunno why I don't see it pop up but the click seems to be working
                         toast("A new medicine has been added!")

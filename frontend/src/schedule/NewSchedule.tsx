@@ -29,7 +29,7 @@ function Schedule({ children }: { children: React.ReactNode }) {
                 })}</h2>
 
 
-                {/* <ScheduleDaily /> */}
+                <ScheduleDaily />
             </div>
     
             <div className="scheduleMedicine">
