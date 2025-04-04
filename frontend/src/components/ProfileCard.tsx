@@ -46,14 +46,6 @@ export function ProfileCard() {
                     Blood Pressure: {latestVital.bloodPressure}, Temperature: {latestVital.temperature}&deg;F, Weight: {latestVital.weight}kg
                 </p>
                 <p><strong>Allergies:</strong> {user.allergies.length > 0 ? user.allergies.join(", ") : "None"}</p>
-                <p><strong>Documents:</strong></p>
-                <ul className="list-disc list-inside">
-                    {user.documents.map((doc, index) => (
-                    <li key={index}>
-                        {doc.name} - <a href={doc.file} download>{doc.file}</a>
-                    </li>
-                    ))}
-                </ul>
                 </div>
             </div>
             </CardContent>
