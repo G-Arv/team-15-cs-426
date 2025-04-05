@@ -1,9 +1,17 @@
-/* Additional Page Styling for Schedule.css */
 .scheduleContainer {
     display: inline-flex;
-  }
-  
+}
+
 .scheduleHeaders {
     margin-top: 3em;
     margin-left: 2em;
+}
+
+.scheduleMedicine {
+    margin-top: 6em;
+    margin-left: 10em;  
+}
+
+.calendarSidebar {
+    float: right;
 }

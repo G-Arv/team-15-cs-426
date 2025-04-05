@@ -15,11 +15,11 @@ const routes = createBrowserRouter([
   },
   {
     path: '/journal',
-    element: <Journal children={undefined}/>,
+    element: <Journal/>,
   },
   {
     path: '/schedule',
-    element: <Schedule children={undefined}/>,
+    element: <Schedule/>,
   },
   {
     path: '/profile',
@@ -27,7 +27,7 @@ const routes = createBrowserRouter([
   },
   {
     path: '/settings',
-    element: <Settings children={undefined}/>,
+    element: <Settings/>,
   }
 ]);
 
