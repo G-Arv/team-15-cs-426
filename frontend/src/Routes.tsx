@@ -23,7 +23,7 @@ const routes = createBrowserRouter([
   },
   {
     path: '/profile',
-    element: <Profile children={undefined}/>,
+    element: <Profile/>,
   },
   {
     path: '/settings',
