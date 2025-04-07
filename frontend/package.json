@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@date-fns/tz": "^1.2.0",
     "@esbuild/darwin-x64": "^0.25.2",
     "@hookform/resolvers": "^5.0.1",
     "@radix-ui/react-checkbox": "^1.1.4",
