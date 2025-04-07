@@ -21,8 +21,7 @@ type Medicine = {
 	foodAndPills: number,  // 0 = before, 1 = during, 2 = after
 	dateRange: Date[],   // require a starting date, no end date = infinite
 	timeRange: string[], // includes multiple times during the day if needed more than once
-	weekDays: string[],
-	type: string // the type of medicine, which is a capsule, tablet, or liquid currently 
+	weekDays: string[]
 }
 
 type Vitals = {
