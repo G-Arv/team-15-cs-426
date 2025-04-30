@@ -1,7 +1,7 @@
 import { MedicineDialog } from "./components/ScheduleDialog";
 import { ScheduleDaily } from "./components/ScheduleDaily";
-import CalendarSidebarLayout from "./components/ScheduleCalendarLayout";
 import Layout from "@/components/NavBar/NavSidebarLayout";
+import CalendarSidebarLayout from "@/components/Calendar/ScheduleCalendarLayout";
 // import "./Schedule.css"
 
 export function Schedule() {
