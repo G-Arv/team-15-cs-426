@@ -70,7 +70,6 @@ async function handleProxy(
 // Routes
 app.post("/a", (req, res) => handleProxy("service-a", req, res));
 app.post("/b", (req, res) => handleProxy("service-b", req, res));
-app.post("/18", (req, res) => handleProxy("service-18", req, res));
 
 
 app.listen(PORT, () => {
