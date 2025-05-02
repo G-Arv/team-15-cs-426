@@ -12,7 +12,7 @@
 #
 # Note: this has been modified to account for the new services. 
 version: '3.9'
-name: ms-arch
+name: backend
 
 services:
   registry:
