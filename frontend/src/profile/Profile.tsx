@@ -3,7 +3,6 @@ import { DocumentCards } from "@/components/DocumentCard.tsx";
 import { ProfileCard } from "../components/ProfileCard.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { UploadDocumentForm } from "@/components/UploadDocumentForm.tsx";
-import "./Profile.css";
 import Layout from "@/components/NavBar/NavSidebarLayout";
 import SearchBar from "../components/SearchBar";
 

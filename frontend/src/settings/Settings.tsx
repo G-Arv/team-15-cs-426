@@ -1,4 +1,3 @@
-import "./Settings.css"
 import Layout from "@/components/NavBar/NavSidebarLayout";
 
 export function Settings () {

@@ -1,9 +1,0 @@
-/* Additional Page Styling for Settings.css */
-.settingsContainer {
-    display: inline-flex;
-  }
-  
-.settingsHeaders {
-    margin-top: 3em;
-    margin-left: 2em;
-}

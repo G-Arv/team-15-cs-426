@@ -28,7 +28,11 @@ const medicineSchema = z.object({
         message: "You have to select at least one item.",
     }),
     type: z.string()
-})
+}).refine((data) => data.endDate > data.startDate, {
+    message: "End date must be after start date.",
+    path: ["endDate"],
+ })
+ 
 
 const daysOfWeekArr = [
     {
