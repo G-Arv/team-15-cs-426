@@ -1,0 +1,118 @@
+# This is a docker compose file for defining and running
+# multi-container environments. It simplifies the control
+# of your application stack into a single configuration
+# file. The following commands are useful:
+#
+#   docker compose up          - "runs" the entire system
+#   docker compose up --build  - force a build and "runs" system
+#   docker compose up -d       - "runs" system in detacted mode
+#   docker compose down        - "closes" the entire system and deletes everything
+#   docker compose stop        - stop running containers without removing them
+#   docker compose start       - start previously stopped containers
+#
+# Note: this has been modified to account for the new services. 
+version: '3.9'
+name: backend
+
+services:
+  registry:
+    build:
+      context: ./registry
+    container_name: registry
+    networks:
+      - skynet
+
+  service-a:
+    build:
+      context: ./service-a
+    container_name: service-a
+    depends_on:
+      - registry
+    networks:
+      - skynet
+
+  service-b:
+    build:
+      context: ./service-b
+    container_name: service-b
+    depends_on:
+      - registry
+    networks:
+      - skynet
+
+  service-c:
+    build:
+      context: ./service-c
+    container_name: service-c
+    depends_on:
+      - registry
+    networks:
+      - skynet
+
+  service-d:
+    build:
+      context: ./service-d
+    container_name: service-d
+    depends_on:
+      - registry
+    networks:
+      - skynet
+
+  service-schedule:
+    build:
+      context: ./service-schedule
+    container_name: service-schedule
+    depends_on:
+      - registry
+    networks:
+      - skynet
+    
+  service-journal:
+    build:
+      context: ./service-journal
+    container_name: service-journal
+    depends_on:
+      - registry
+    networks:
+      - skynet
+
+  service-profile:
+    build:
+      context: ./service-profile
+    container_name: service-profile
+    depends_on:
+      - registry
+    networks:
+      - skynet
+
+  service-documents:
+    build:
+      context: ./service-documents
+    container_name: service-documents
+    depends_on:
+      - registry
+    networks:
+      - skynet
+    
+  api-gateway:
+    build:
+      context: ./api-gateway
+    container_name: api-gateway
+    depends_on:
+      - service-a
+      - service-b
+      - service-c
+      - service-d
+      - service-schedule
+      - service-journal
+      - service-profile
+      - service-documents
+    networks:
+      - skynet
+    ports:
+      - "3000:3000"
+
+networks:
+  skynet:
+    driver: bridge
+
