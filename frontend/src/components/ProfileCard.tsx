@@ -16,7 +16,7 @@ export function ProfileCard() {
     const latestVital = user.vitals[0];
 
     return (
-        <Card className="w-[800px]">
+        <Card className="w-[90%]">
             <CardHeader className="text-left">
             {profilePic && (
                 <img

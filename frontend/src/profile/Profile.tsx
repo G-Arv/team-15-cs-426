@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { DocumentCards } from "@/components/DocumentCard.tsx";
 import { ProfileCard } from "../components/ProfileCard.tsx";
 import { Button } from "@/components/ui/button.tsx";
@@ -14,7 +14,7 @@ export function Profile () {
 
     <Layout>
         <div className="flex flex-col items-center min-h-screen p-4 space-y-8">
-                <header className="text-2xl font-bold mb-4">Profile Page</header>
+                <header className="text-2xl font-bold mb-4 text-[#2b3674]">Profile Page</header>
                 <ProfileCard />
                 <SearchBar/>
                 <Button type="submit" onClick={() => setPopupOpen(true)}>Upload Document</Button>
