@@ -1,6 +1,8 @@
 import express from "express";
 import { pino } from "pino";
 import { Request, Response } from "express";
+import {  getUser, addUser } from "../../service-schedule/src/user.ts"
+import { query } from "../../db/db.ts"
 
 const PORT = 3000;
 const REGISTRY_URL = "http://registry:3000";
@@ -33,34 +35,35 @@ async function registerWithRetry(name: string, url: string, maxRetries = 5) {
   process.exit(1);
 }
 
-/// The GET request for the user’s data to Postgres
-app.get("/schedule/getUser", async (req: Request, res: Response) => {
-  try {
-    const query = 'SELECT * FROM Medicine'; // to be filled in with values
-    const result = await db.query(query);
-    res.json(result.rows);
-  } catch (err) {
-    log.error(`Error contacting database: ${(err as Error).message}`);
-    res.status(500).send("Error with schedule contacting database");
-  }
- });
+// The GET and POST requests for users
+app.get("/schedule/getUser", getUser);
+app.post("/schedule/getUser", addUser);
+
+// /// The GET request for the user’s data to Postgres
+// app.get("/schedule/getUser", async (req: Request, res: Response) => {
+//   try {
+//     const query = 'SELECT * FROM Medicine'; // to be filled in with values
+//     const result = await db.query(query, [], null);
+//     res.json(result.rows);
+//   } catch (err) {
+//     log.error(`Error contacting database: ${(err as Error).message}`);
+//     res.status(500).send("Error with schedule contacting database");
+//   }
+//  });
  
- 
- // The POST request for the user's data to Postgres
- app.post("/schedule/postUser", async (req: Request, res: Response) => {
-  try {
-    const { name, amount, foodAndPills, dateRange, timeRange, weekDays, type} = req.body;
-    const query = 'INSERT INTO Medicine (name, amount, foodAndPills, dateRange, timeRange, weekDays, type) VALUES ($1, $2, $3, $4, $5, $6, $7)'; // to be filled in
-    const values = [name, amount, foodAndPills, dateRange, timeRange, weekDays, type];
-    const result = await db.query(query, values); // to change with actual database
-    res.json(result.rows[0]);
-  } catch (err) {
-    log.error(`Error contacting database: ${(err as Error).message}`);
-    res.status(500).send("Error with schedule updating database");
-  }
- });
- 
- 
+//  // The POST request for the user's data to Postgres
+//  app.post("/schedule/addUser", async (req: Request, res: Response) => {
+//   try {
+//     const { name, amount, foodAndPills, dateRange, timeRange, weekDays, type} = req.body;
+//     const query = 'INSERT INTO Medicine (name, amount, foodAndPills, dateRange, timeRange, weekDays, type) VALUES ($1, $2, $3, $4, $5, $6, $7)'; // to be filled in
+//     const values = [name, amount, foodAndPills, dateRange, timeRange, weekDays, type];
+//     const result = await db.query(query, values, null); // to change with actual database
+//     res.json(result.rows[0]);
+//   } catch (err) {
+//     log.error(`Error contacting database: ${(err as Error).message}`);
+//     res.status(500).send("Error with schedule updating database");
+//   }
+//  });
  
  app.listen(PORT, () => {
   log.info(`Service Schedule listening on port ${PORT}`);
