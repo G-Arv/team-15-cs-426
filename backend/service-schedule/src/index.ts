@@ -33,10 +33,10 @@ async function registerWithRetry(name: string, url: string, maxRetries = 5) {
   process.exit(1);
 }
 
-// The GET request for the user’s data to Postgres
+/// The GET request for the user’s data to Postgres
 app.get("/schedule/getUser", async (req: Request, res: Response) => {
   try {
-    const query = 'SELECT'; // to be filled in with values
+    const query = 'SELECT * FROM Medicine'; // to be filled in with values
     const result = await db.query(query);
     res.json(result.rows);
   } catch (err) {
@@ -47,10 +47,10 @@ app.get("/schedule/getUser", async (req: Request, res: Response) => {
  
  
  // The POST request for the user's data to Postgres
- app.post("/schedule/getUser", async (req: Request, res: Response) => {
+ app.post("/schedule/postUser", async (req: Request, res: Response) => {
   try {
     const { name, amount, foodAndPills, dateRange, timeRange, weekDays, type} = req.body;
-    const query = 'INSERT'; // to be filled in
+    const query = 'INSERT INTO Medicine (name, amount, foodAndPills, dateRange, timeRange, weekDays, type) VALUES ($1, $2, $3, $4, $5, $6, $7)'; // to be filled in
     const values = [name, amount, foodAndPills, dateRange, timeRange, weekDays, type];
     const result = await db.query(query, values); // to change with actual database
     res.json(result.rows[0]);
@@ -59,6 +59,7 @@ app.get("/schedule/getUser", async (req: Request, res: Response) => {
     res.status(500).send("Error with schedule updating database");
   }
  });
+ 
  
  
  app.listen(PORT, () => {
