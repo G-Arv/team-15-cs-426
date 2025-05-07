@@ -10,8 +10,8 @@
 #   docker compose stop        - stop running containers without removing them
 #   docker compose start       - start previously stopped containers
 #
-# Note: this has been modified to account for the new services. 
-version: '3.9'
+# Note: this has been modified to account for the new services.
+version: "3.9"
 name: backend
 
 services:
@@ -20,93 +20,124 @@ services:
       context: ./registry
     container_name: registry
     networks:
-      - skynet
+      - skynet # service-a:
+  #   build:
+  #     context: ./service-a
+  #   container_name: service-a
+  #   depends_on:
+  #     - registry
+  #   networks:
+  #     - skynet
 
-  service-a:
-    build:
-      context: ./service-a
-    container_name: service-a
-    depends_on:
-      - registry
-    networks:
-      - skynet
+  # service-b:
+  #   build:
+  #     context: ./service-b
+  #   container_name: service-b
+  #   depends_on:
+  #     - registry
+  #   networks:
+  #     - skynet
 
-  service-b:
-    build:
-      context: ./service-b
-    container_name: service-b
-    depends_on:
-      - registry
-    networks:
-      - skynet
+  # service-c:
+  #   build:
+  #     context: ./service-c
+  #   container_name: service-c
+  #   depends_on:
+  #     - registry
+  #   networks:
+  #     - skynet
 
-  service-c:
-    build:
-      context: ./service-c
-    container_name: service-c
-    depends_on:
-      - registry
-    networks:
-      - skynet
+  # service-d:
+  #   build:
+  #     context: ./service-d
+  #   container_name: service-d
+  #   depends_on:
+  #     - registry
+  #   networks:
+  #     - skynet
 
-  service-d:
-    build:
-      context: ./service-d
-    container_name: service-d
-    depends_on:
-      - registry
-    networks:
-      - skynet
+  # service-schedule:
+  #   build:
+  #     context: ./service-schedule
+  #   container_name: service-schedule
+  #   depends_on:
+  #     - registry
+  #   networks:
+  #     - skynet
 
-  service-schedule:
-    build:
-      context: ./service-schedule
-    container_name: service-schedule
-    depends_on:
-      - registry
-    networks:
-      - skynet
-    
-  service-journal:
-    build:
-      context: ./service-journal
-    container_name: service-journal
-    depends_on:
-      - registry
-    networks:
-      - skynet
+  # service-journal:
+  #   build:
+  #     context: ./service-journal
+  #   container_name: service-journal
+  #   depends_on:
+  #     - registry
+  #   networks:
+  #     - skynet
 
-  service-profile:
-    build:
-      context: ./service-profile
-    container_name: service-profile
-    depends_on:
-      - registry
-    networks:
-      - skynet
+  # service-profile:
+  #   build:
+  #     context: ./service-profile
+  #   container_name: service-profile
+  #   depends_on:
+  #     - registry
+  #   networks:
+  #     - skynet
 
-  service-documents:
-    build:
-      context: ./service-documents
-    container_name: service-documents
-    depends_on:
-      - registry
-    networks:
-      - skynet
-    
+  # service-documents:
+  #   build:
+  #     context: ./service-documents
+  #   container_name: service-documents
+  #   depends_on:
+  #     - registry
+  #   networks:
+  #     - skynet
+  db:
+    image: postgres:latest
+    restart: always
+    shm_size: 128mb
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB} #optional (specify default database instead of $POSTGRES_DB)
+    hostname: skynet
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  # node-pg:
+  #   build:
+  #     context: ./db
+  #   container_name: node-pg
+  #   networks:
+  #     - skynet
+
+  # pgadmin:
+  #   container_name: pgadmin
+  #   image: dpage/pgadmin4:latest
+  #   environment:
+  #     - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
+  #     - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW}
+  #   ports:
+  #     - "5050:80"
+  #   restart: always
+  adminer:
+    image: adminer
+    hostname: skynet
+    restart: always
+    ports:
+      - 8080:8080
+
   api-gateway:
     build:
       context: ./api-gateway
     container_name: api-gateway
     depends_on:
-      - service-a
-      - service-b
-      - service-c
-      - service-d
-      - service-schedule
-      - service-journal
-      - service-profile
-      - service-documents
+      - db
+      # - service-schedule
+      # - service-journal
+      # - service-profile
+      # - service-documents
     networks:
       - skynet
     ports:
@@ -115,4 +146,4 @@ services:
 networks:
   skynet:
     driver: bridge
-
+    attachable: true
