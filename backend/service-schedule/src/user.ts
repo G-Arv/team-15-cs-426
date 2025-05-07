@@ -1,4 +1,4 @@
-import * as db from "../../db/db.ts";
+import * as db from "../src/db.ts"
 
 // The GET request for the user’s data to Postgres
 export async function getUser(_req: any, res: any) {

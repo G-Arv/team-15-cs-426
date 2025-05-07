@@ -56,14 +56,14 @@ services:
   #   networks:
   #     - skynet
 
-  service-schedule:
-    build:
-      context: ./service-schedule
-    container_name: service-schedule
-    depends_on:
-      - registry
-    networks:
-      - skynet
+  # service-schedule:
+  #   build:
+  #     context: ./service-schedule
+  #   container_name: service-schedule
+  #   depends_on:
+  #     - registry
+  #   networks:
+  #     - skynet
 
   # service-journal:
   #   build:
