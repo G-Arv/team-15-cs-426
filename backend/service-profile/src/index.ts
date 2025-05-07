@@ -1,7 +1,7 @@
 import express from "express";
 import { pino } from "pino";
 import { Request, Response } from "express";
-import * as db from "../db/db";
+import * as db from "./db/db.ts";
 
 const PORT = 3000;
 const REGISTRY_URL = "http://registry:3000";
