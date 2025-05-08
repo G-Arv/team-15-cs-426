@@ -1,4 +1,4 @@
-import * as db from "../db/db.js";
+import * as db from "../../db/src/db.ts";
 
 export async function getUser(req, res, next) {
     try {

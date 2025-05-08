@@ -1,7 +1,7 @@
 import express from "express";
 import { pino } from "pino";
 import { Request, Response } from "express";
-import * as db from "./db/db.ts";
+import { getProfile, updateProfile } from "../../service-profile/src/profile.js";
 
 const PORT = 3000;
 const REGISTRY_URL = "http://registry:3000";
@@ -34,44 +34,46 @@ async function registerWithRetry(name: string, url: string, maxRetries = 5) {
   process.exit(1);
 }
 
-// The GET request for the user’s data to Postgres
-app.get("/profile/getUser", async (req: Request, res: Response) => {
-  try {
-    const query = 'SELECT';
-    const result = await db.query(query);
-    res.json(result.rows);
-  } catch (err) {
-    log.error(`Error contacting database: ${(err as Error).message}`);
-    res.status(500).send("Error with profile contacting database");
-  }
-});
+app.get("/profile/getProfile", getProfile);
+app.post("/profile/getProfile", updateProfile);
+// // The GET request for the user’s data to Postgres
+// app.get("/profile/getUser", async (req: Request, res: Response) => {
+//   try {
+//     const query = 'SELECT';
+//     const result = await db.query(query);
+//     res.json(result.rows);
+//   } catch (err) {
+//     log.error(`Error contacting database: ${(err as Error).message}`);
+//     res.status(500).send("Error with profile contacting database");
+//   }
+// });
 
-// The PUT request for updating the user's data to Postgres
-app.put("/profile/updateUser", async (req: Request, res: Response) => {
-  try {
-    const { userId, firstName, lastName, email, phoneNumber, gender, age, userName } = req.body;
-    const query = `
-      UPDATE users
-      SET 
-        firstName = $1,
-        lastName = $2,
-        email = $3,
-        phoneNumber = $4,
-        gender = $5,
-        age = $6,
-        userName = $7
-      WHERE userId = $8
-      RETURNING *;
-    `;
-    const values = [firstName, lastName, email, phoneNumber, gender, age, userName, userId];
-    const result = await db.query(query, values);
+// // The PUT request for updating the user's data to Postgres
+// app.put("/profile/updateUser", async (req: Request, res: Response) => {
+//   try {
+//     const { userId, firstName, lastName, email, phoneNumber, gender, age, userName } = req.body;
+//     const query = `
+//       UPDATE users
+//       SET 
+//         firstName = $1,
+//         lastName = $2,
+//         email = $3,
+//         phoneNumber = $4,
+//         gender = $5,
+//         age = $6,
+//         userName = $7
+//       WHERE userId = $8
+//       RETURNING *;
+//     `;
+//     const values = [firstName, lastName, email, phoneNumber, gender, age, userName, userId];
+//     const result = await db.query(query, values);
 
-    res.json(result.rows[0]);
-  } catch (err) {
-    log.error(`Error contacting database: ${(err as Error).message}`);
-    res.status(500).send("Error with updating profile");
-  }
-});
+//     res.json(result.rows[0]);
+//   } catch (err) {
+//     log.error(`Error contacting database: ${(err as Error).message}`);
+//     res.status(500).send("Error with updating profile");
+//   }
+// });
 
 app.listen(PORT, () => {
   log.info(`Service Schedule listening on port ${PORT}`);
