@@ -6,7 +6,7 @@ These are the services that are a part of our architecture:
 - `api-gateway`: a service to forward requests to other services. This is based on lecture material.
 - `registry`: a service to register the URLs of other services. This is based on lecture material as well.
 - `service-schedule`: a service for the Schedule Page (js/node/express)
-- `service-journal`: a service for the Journal Page (js/node/express)
+- `journal-service`: a service for the Journal Page (js/node/express)
 - `service-profile`: a service for the Profile Page (js/node/express)
 - `service-documents`: a service for the Documents portion of the Profile Page (js/node/express)
 

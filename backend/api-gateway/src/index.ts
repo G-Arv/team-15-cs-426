@@ -51,25 +51,42 @@ async function handleProxy(
   req: express.Request,
   res: express.Response,
 ) {
-  const url = await lookupService(serviceName);
-  if (!url) return res.status(502).send(`Could not resolve ${serviceName}`);
+  const baseUrl = await lookupService(serviceName);
+  if (!baseUrl) return res.status(502).send(`Could not resolve ${serviceName}`);
+
+  const targetUrl = `${baseUrl}${req.originalUrl}`;
+  const options: RequestInit = {
+    method: req.method,
+    headers: { "Content-Type": "application/json" },
+  };
+
+  if (req.method !== "GET" && req.method !== "DELETE") {
+    options.body = JSON.stringify(req.body);
+  }
+
   try {
-    const response = await fetch(url, {
-      method: req.method,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(req.body),
-    });
-    const result = await response.json();
-    res.status(response.status).json(result);
+    const response = await fetch(targetUrl, options);
+    const contentType = response.headers.get("content-type");
+
+    if (contentType?.includes("application/json")) {
+      const result = await response.json();
+      res.status(response.status).json(result);
+    } else {
+      const text = await response.text();
+      res.status(response.status).send(text);
+    }
   } catch (err) {
     log.error(`Error forwarding to ${serviceName}: ${(err as Error).message}`);
     res.status(500).send(`Error communicating with ${serviceName}`);
   }
 }
 
+
 // Routes
-app.post("/a", (req, res) => handleProxy("service-a", req, res));
-app.post("/b", (req, res) => handleProxy("service-b", req, res));
+app.post("/a", (req, res) => void handleProxy("service-a", req, res));
+app.post("/b", (req, res) => void handleProxy("service-b", req, res));
+app.use("/journal", (req, res) => void handleProxy("journal-service", req, res));
+
 
 
 app.listen(PORT, () => {
