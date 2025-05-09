@@ -36,7 +36,11 @@ export function UploadDocumentForm() {
 
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+        const formData = new FormData();
+        // formData.append("userId", values.userId);
+        formData.append("documentName", values.documentName);
+        if (values.file) {
+        formData.append("file", values.file);
     }
 
     return (

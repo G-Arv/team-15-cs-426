@@ -1,6 +1,7 @@
 import express from "express";
 import { pino } from "pino";
 import { Request, Response } from "express";
+import { getDocuments, updateDocuments, deleteDocuments } from "../src/documents.js";
 
 const PORT = 3000;
 const REGISTRY_URL = "http://registry:3000";
@@ -33,52 +34,55 @@ async function registerWithRetry(name: string, url: string, maxRetries = 5) {
   process.exit(1);
 }
 
-// The GET request for the user’s documents to Postgres
-app.get("/profile/getDocument", async (req: Request, res: Response) => {
-    try {
-      const query = 'SELECT * FROM document WHERE userId = $1;';
-      const { userId } = req.body;
-      const result = await db.query(query, userId);
-      res.json(result.rows);
-    } catch (err) {
-      log.error(`Error contacting database: ${(err as Error).message}`);
-      res.status(500).send("Error with profile contacting database");
-    }
-});
+app.get("/profile/getDocuments", getDocuments);
+app.post("/profile/getDocuments", updateDocuments);
+app.delete("profile/getDocuments", deleteDocuments);
+// // The GET request for the user’s documents to Postgres
+// app.get("/profile/getDocument", async (req: Request, res: Response) => {
+//     try {
+//       const query = 'SELECT * FROM document WHERE userId = $1;';
+//       const { userId } = req.body;
+//       const result = await db.query(query, userId);
+//       res.json(result.rows);
+//     } catch (err) {
+//       log.error(`Error contacting database: ${(err as Error).message}`);
+//       res.status(500).send("Error with profile contacting database");
+//     }
+// });
 
-// The PUT request for uploading the user's document to Postgres
-app.put("/profile/updateDocument", async (req: Request, res: Response) => {
-    try {
-      const { name, file, userId } = req.body;
-      const query = `
-        UPDATE document
-        INSERT VALUES (
-          name = $1,
-          file = $2,
-          userId = $3
-          )
-        RETURNING *;
-      `;
-      const values = [name, file, userId];
-      const result = await db.query(query, values);
+// // The PUT request for uploading the user's document to Postgres
+// app.put("/profile/updateDocument", async (req: Request, res: Response) => {
+//     try {
+//       const { name, file, userId } = req.body;
+//       const query = `
+//         UPDATE document
+//         INSERT VALUES (
+//           name = $1,
+//           file = $2,
+//           userId = $3
+//           )
+//         RETURNING *;
+//       `;
+//       const values = [name, file, userId];
+//       const result = await db.query(query, values);
   
-      res.json(result);
-    } catch (err) {
-      log.error(`Error contacting database: ${(err as Error).message}`);
-      res.status(500).send("Error with updating profile");
-    }
-});
+//       res.json(result);
+//     } catch (err) {
+//       log.error(`Error contacting database: ${(err as Error).message}`);
+//       res.status(500).send("Error with updating profile");
+//     }
+// });
 
-// The DELETE request for the user’s document to Postgres
-app.delete("/profile/deleteDocument", async (req: Request, res: Response) => {
-    try {
-      const query = 'DELETE FROM documents WHERE userId = $1 AND name = $2;';
-      const { userId, name } = req.body;
-      const values = [userId, name]
-      const result = await db.query(query, values);
-      res.json(result);
-    } catch (err) {
-      log.error(`Error contacting database: ${(err as Error).message}`);
-      res.status(500).send("Error with profile contacting database");
-    }
-});
+// // The DELETE request for the user’s document to Postgres
+// app.delete("/profile/deleteDocument", async (req: Request, res: Response) => {
+//     try {
+//       const query = 'DELETE FROM documents WHERE userId = $1 AND name = $2;';
+//       const { userId, name } = req.body;
+//       const values = [userId, name]
+//       const result = await db.query(query, values);
+//       res.json(result);
+//     } catch (err) {
+//       log.error(`Error contacting database: ${(err as Error).message}`);
+//       res.status(500).send("Error with profile contacting database");
+//     }
+// });
